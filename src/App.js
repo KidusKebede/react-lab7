@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import Posts from "./containers/Posts";
 
 function App() {
+  const post = [
+    { id: 111, title: "Happiness", author: "John" },
+    { id: 112, title: "MIU", author: "Dean" },
+    { id: 113, title: "Enjoy Life", author: "Jasmine" },
+  ];
+  const [title, setTitle] = useState("");
+  const [postsList, setPostList] = useState(post);
+  const titleHandler = (title) => {
+    const post = [...postsList];
+    post[0].title = title;
+    setPostList(post);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <div class="myDivapp">
+      <Posts postList={postsList} />
+     
+      <input
+        type="text"
+        id="input"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      ></input>
+      <br />
+      <button onClick={() => titleHandler(title)}>Change Name</button>
+      </div>
+
   );
 }
 
